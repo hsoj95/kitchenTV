@@ -102,24 +102,7 @@ function whatsnext($s,$mus,$streams){
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,inherit,400" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="weather.css">
     <link rel="stylesheet" href="rasp.css">
-    <style>#div_iframe {
-  	    overflow: hidden;
-	    border-bottom: 1px solid #000000;
-  	    height: 500px;
-  	    width: 100%
-	    }
-	    #ytplayer {
- 	    width: 100%;
- 	    height: 1000%;   /* 10x the div height to embrace the whole page */
-	    overflow: hidden;
-	    }
-	    #digi {
-	    left: 1570px;
-	   }
-	   #dc {
-	    left: 0.2em;
-	   }
-    </style>
+
     <script type="text/javascript">
         // PHP dependant js vars ~
         // page udate after t seconds
@@ -133,10 +116,10 @@ function whatsnext($s,$mus,$streams){
 
 <body>
 <?php
-//echo check_IP();
+echo check_IP();
 ?>
     <div class ="col1">
-        <p><div id="div_iframe"><iframe id="ytplayer" src='https://www.wunderground.com/cgi-bin/findweather/getForecast?query=90210'></iframe></div>
+        <p><iframe id="ytplayer" width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $u; ?>?rel=0&autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
         </p>
         <span id="digi">
             <span id="dc"></span><br />
@@ -159,6 +142,7 @@ function whatsnext($s,$mus,$streams){
                     <div style="clear: both;"></div>
                 </div>
             </div>
+
 
             <div style="clear: both;"></div>
         </div>
@@ -193,6 +177,7 @@ function whatsnext($s,$mus,$streams){
 		        </a>
              </ul>
 
+
         </div>
 
     </div>
@@ -225,11 +210,6 @@ function whatsnext($s,$mus,$streams){
     <script type="text/javascript">
         auto_volume();
         showNews(headlines);
-	document.getElementById('div_iframe').scrollTop = 58;
-	//var myIframe = document.getElementById('ytplayer');
-	//myIframe.onload = function(){
-    	//myIframe.contentWindow.scrollTo(500,500);
-	//};
     </script>
 
 </body>
@@ -301,7 +281,7 @@ function isNews($t){
 }
 
 
-/*function check_IP(){
+function check_IP(){
     $realIP = file_get_contents("http://ipecho.net/plain");
     $value="";
     $file="ip.txt";
@@ -330,5 +310,5 @@ function mail_test(){
     $result=mail($to,$subject,$message,$header);
 
     return $result;
-} */
+}
 ?>

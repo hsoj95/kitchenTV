@@ -1,6 +1,6 @@
 body {
   background-color: #9eddff;
-  font: 400 1em/1.38 Montserrat;
+  font: 400 1em/1.38 Roboto;
   color: #ffffff;
   margin: 0;
   overflow: hidden;
@@ -99,8 +99,8 @@ body {
 
 #digi{
 position: absolute;
-top: -1.9em;
-left: -0.05em;
+top: -1.25em;
+left: 1em;
 z-index: 99;
 margin: 0;
 padding: 0;
@@ -111,16 +111,19 @@ width: 100%;
 color: #fff;	
 font-size: 6em;
 text-shadow: 0 0 20px #000;
+position: relative;
+left: 0em;
+text-align: center;
 
 }
 #date{
 display: block;
 width: 100%;
-text-align: justify;
+text-align: center;
 text-shadow: 0 0 20px #000;
-font-size: 1.4em;
+font-size: 1.70em;
 position: relative;
-top: -1.3em;
+top: -1em;
 left: 0em;
 
 }
@@ -153,7 +156,7 @@ color: #fff;
 	border: 0;
 }
 
-#ytplayer{border-top: 100px solid #000;}
+#ytplayer{border-top: 1px solid #000;}
 
 .ipchange{
 	position: absolute;

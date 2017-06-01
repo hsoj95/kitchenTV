@@ -2,18 +2,18 @@
 width: 100%;
 background-color: #333;
 margin: 0;
-
 }
 
 .w_left{
-    width: 60%;
+    width: 55%;
     float: left;
     padding-top: 3em;
+    padding-bottom: -125px;
 }
 
 
 .w_right{
-        width: 40%;
+        width: 45%;
     float: right;
     
 }
@@ -28,8 +28,8 @@ text-align: center;
     width: 70%;
   height: auto;
   overflow: hidden;
-  margin-top: -40px;
-  margin-bottom: -40px;
+  margin-top: -90px;
+  margin-bottom: -60px;
 }
 
 .info_bg {
@@ -37,7 +37,7 @@ background-color: #1ab1ed;
 }
 
 .i1{
-    width: 35%;
+    width: 50%;
     float: left;
 text-align: center;
 }
@@ -46,7 +46,7 @@ text-align: center;
 }
 
 .i2{
-    width: 65%;
+    width: 50%;
     float: right;
 text-align: center;
 }
@@ -56,7 +56,7 @@ text-align: center;
 
 
 .dropicon {
-width: 50px;
+width: 100px;
   height: auto;
   overflow: hidden;
   vertical-align: middle;
@@ -72,17 +72,17 @@ width: 50px;
 
 
 .location {
-    font-size: 1em;
+    font-size: 5em;
 text-align: center;
 }
 
 .temperature {
-font-size: 4em;
+font-size: 10em;
 text-align: center;
 }
 
 .windicon {
-width: 50px;
+width: 100px;
   height: auto;
   overflow: hidden;
     vertical-align: middle;
@@ -97,9 +97,12 @@ width: 50px;
 }
 
 .updated{
-font-size: 0.5em;
+font-size: 3em;
 text-align: center;
 border: 1px solid #333;
+}
+.updated:before {
+content: "Last Updated: ";
 }
 .forecast{
     background-color: #fff;
@@ -108,13 +111,13 @@ border: 1px solid #333;
 
 }
 .forecast span{
-    width: 5em;
+    width: 127px;
  display: inline-block;
-font-size: 0.8em;
+font-size: 2em;
 padding-bottom: 5px;
 }
 .forecast span img{
-    width: 50px;
+    width: 100px;
   height: auto;
   margin-bottom: -10px;
 }

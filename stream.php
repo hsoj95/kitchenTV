@@ -1,10 +1,10 @@
 <?php
-date_default_timezone_set("America/New_York");
+date_default_timezone_set("America/New_York"); 
 $date= strtoupper(date("M jS l", time()));
 
 //$mail_test=mail_test();
 
-$vol=(isset($_REQUEST['f_vol'])?$_REQUEST['f_vol']:20);
+$vol=(isset($_REQUEST['f_vol'])?$_REQUEST['f_vol']:100);
 $mus=(isset($_REQUEST['mus'])?$_REQUEST['mus']:0);
 // youtube code, time to display in seconds
 // multiplier m
@@ -12,20 +12,20 @@ $m=1000;
 
 // Al Jazeera
 $streams[1]['name']="AJ";
-$streams[1]['url']="UgJtWREOXHA";
+$streams[1]['url']="dp6W0ZcYwE4";
 $streams[1]['time']=1200*$m;
 $streams[1]['mus']=0;
 
 // monstercat music
 $streams[2]['name']="MC";
-$streams[2]['url']="-T1H39aSWMM";
+$streams[2]['url']="cCmJdLA5b1I";
 $streams[2]['time']=300*$m;
 $streams[2]['mus']=1;
 
 
 // france 24 news
 $streams[3]['name']="FR";
-$streams[3]['url']="1Ydto3Iyzic";
+$streams[3]['url']="Fwxuzl4ZrHo";
 $streams[3]['time']=1200*$m;
 $streams[3]['mus']=0;
 
@@ -109,7 +109,7 @@ function whatsnext($s,$mus,$streams){
         // setTimeout(function(){ document.forms["poster"].submit(); }, <?php echo $t; ?>);
         // volume ON/OFF morning/evening
         var on, off, vol = <?php echo $vol; ?>;
-        // bbc headlines
+        // bbc headlines 
         var headlines =[<?php echo getHeadlines(); ?>];
     </script>
 </head>
@@ -135,15 +135,15 @@ echo check_IP();
             <div class="w_right">
                 <div class="climate_bg"></div>
                 <p class="forecast"></p>
-
-                <div class="info_bg">
-                    <p class="i1"><img class="dropicon" src="images/Droplet.svg"><span class="humidity"></span></p>
+                
+                <div class="info_bg"> 
+                    <p class="i1"><img class="dropicon" src="images/Droplet.svg"><span class="humidity"></span></p>       
                     <p class="i2"><img class="windicon" src="images/Wind.svg"><span  class="windspeed"></span></p>
                     <div style="clear: both;"></div>
                 </div>
             </div>
-
-
+    
+            
             <div style="clear: both;"></div>
         </div>
 
@@ -155,7 +155,7 @@ echo check_IP();
                 <li class="btn" id="vol50">50</li>
                 <li class="btn" id="vol100">100</li>
             </ul>
-
+            
                <ul class="vid">
                 <li>Vid</li>
                 <?php
@@ -169,14 +169,15 @@ echo check_IP();
             </ul>
 
             <ul class="vid">
-                <a href="web.php"><li class="btn2">DuckG</li>
-		        </a>
-		        <a href='index.php'><li class='btn2'>WU</li>
-		        </a>
-		        <a href="news.php"><li class="btn2">News</li>
-		        </a>
-             </ul>
-
+                <li>Search</li>
+                <a href="web.php">
+		         <li class="btn2">DuckG</li>
+		     </a>
+                <li>Home</li>
+		     <a href='index.php'>
+		         <li class='btn2'>WU</li>
+		     </a>
+            </ul>
 
         </div>
 
@@ -207,27 +208,27 @@ echo check_IP();
     <script src="jsclock.jsf"></script>
     <script src="library.jsf"></script>
 
-    <script type="text/javascript">
+    <script type="text/javascript">    
         auto_volume();
         showNews(headlines);
     </script>
-
+    
 </body>
 </html>
 
 <?php
 function bg($id){
     $col2=array('col1_sunrise','col1_morning','col1_midday','col1_evening','col1_night');
-    $hr=date('H', time());
+    $hr=date('H', time()); 
 
     if($hr<=5){
         $class=${$id}[4];
     }elseif($hr<=9){
         $class=${$id}[0];
     }elseif($hr<=12){
-        $class=${$id}[1];
+        $class=${$id}[1]; 
     }elseif($hr<=17){
-        $class=${$id}[2];
+        $class=${$id}[2];    
     }elseif($hr<=20){
         $class=${$id}[3];
     }else{
@@ -238,7 +239,7 @@ function bg($id){
 
 function getHeadlines(){
     $html="";
-    $file=file_get_contents("http://feeds.bbci.co.uk/news/rss.xml?edition=uk");
+    $file=file_get_contents("http://feeds.bbci.co.uk/news/rss.xml?edition=uk"); 
     preg_match_all("%<title>(.*?)</title>%s", $file, $titles,PREG_PATTERN_ORDER,920);
     preg_match_all("%<link>(.*?)</link>%s", $file, $links,PREG_PATTERN_ORDER,920);
     preg_match_all("%<description>(.*?)</description>%s", $file, $desc,PREG_PATTERN_ORDER,920);
@@ -260,7 +261,7 @@ function getS($streams){
 $output=1;
     if(isset($_GET['s']) && array_key_exists($_GET['s'],$streams)){
         $output=$_GET['s'];
-    }
+    } 
     return $output;
 }
 
@@ -295,20 +296,20 @@ function check_IP(){
 
 
 function mail_test(){
-
+    
     $to="riquez@gmail.com";
     $subject = "mail test";
 	$header = "From: pi@d4damage.net\n";
 	$header .= "Reply-To: pi@d4damage.net\n";
 	$header .= "Return-Path: pi@d4damage.net\n";
-
+	
 	$message = "===============================================\n";
 	$message .="This is a test\n";
 	$message .="===============================================\n";
 	$message .="\n";
 
     $result=mail($to,$subject,$message,$header);
-
+    
     return $result;
 }
 ?>

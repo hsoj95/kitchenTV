@@ -135,8 +135,9 @@ left: 0em;
 
 #news{
 font-size: 2em;
-text-align: right;
-padding-right: 1.5em;
+text-align: justify;
+padding-right: 1em;
+padding-left: 1em;
 }
 #news span{
 font-size: 0.8em;

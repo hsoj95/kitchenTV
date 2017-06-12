@@ -1,8 +1,6 @@
 <?php
-date_default_timezone_set("America/New_York");
+date_default_timezone_set("America/New_York"); 
 $date= strtoupper(date("M jS l", time()));
-
-//$mail_test=mail_test();
 
 $vol=(isset($_REQUEST['f_vol'])?$_REQUEST['f_vol']:20);
 $mus=(isset($_REQUEST['mus'])?$_REQUEST['mus']:0);
@@ -10,7 +8,7 @@ $mus=(isset($_REQUEST['mus'])?$_REQUEST['mus']:0);
 // multiplier m
 $m=1000;
 
-// Al Jazeera
+// Al Jazeera - Doesn't work
 $streams[1]['name']="AJ";
 $streams[1]['url']="UgJtWREOXHA";
 $streams[1]['time']=1200*$m;
@@ -114,10 +112,13 @@ function whatsnext($s,$mus,$streams){
 	    overflow: hidden;
 	    }
 	    #digi {
-	    left: 1570px;
+	    left: 1530px;
 	   }
 	   #dc {
 	    left: 0.2em;
+	   }
+	   #date {
+	     left: 15px;
 	   }
     </style>
     <script type="text/javascript">
@@ -126,7 +127,7 @@ function whatsnext($s,$mus,$streams){
         // setTimeout(function(){ document.forms["poster"].submit(); }, <?php echo $t; ?>);
         // volume ON/OFF morning/evening
         var on, off, vol = <?php echo $vol; ?>;
-        // bbc headlines
+        // bbc headlines 
         var headlines =[<?php echo getHeadlines(); ?>];
     </script>
 </head>
@@ -147,14 +148,14 @@ function whatsnext($s,$mus,$streams){
             <div class="w_left">
                 <p class="temperature"></p>
                 <p class="location"></p>
-		<p class="updated"></p>
+		     <p class="updated"></p>
             </div>
             <div class="w_right">
                 <div class="climate_bg"></div>
                 <p class="forecast"></p>
-
-                <div class="info_bg">
-                    <p class="i1"><img class="dropicon" src="images/Droplet.svg"><span class="humidity"></span></p>
+                
+                <div class="info_bg"> 
+                    <p class="i1"><img class="dropicon" src="images/Droplet.svg"><span class="humidity"></span></p>       
                     <p class="i2"><img class="windicon" src="images/Wind.svg"><span  class="windspeed"></span></p>
                     <div style="clear: both;"></div>
                 </div>
@@ -163,17 +164,9 @@ function whatsnext($s,$mus,$streams){
             <div style="clear: both;"></div>
         </div>
 
-        <div id="nav">
-                      <ul>
-                <li>Vol</li>
-                <li class="btn" id="mute-toggle">x</li>
-                <li class="btn" id="vol20">20</li>
-                <li class="btn" id="vol50">50</li>
-                <li class="btn" id="vol100">100</li>
-            </ul>
-
+	<div id="nav">
                <ul class="vid">
-                <li>Vid</li>
+                <li>Streams</li>
                 <?php
                 foreach($streams as $key => $value){
                     ?>
@@ -185,18 +178,13 @@ function whatsnext($s,$mus,$streams){
             </ul>
 
             <ul class="vid">
-                <a href="web.php"><li class="btn2">DuckG</li>
-		        </a>
-		        <a href='index.php'><li class='btn2'>WU</li>
-		        </a>
-		        <a href="news.php"><li class="btn2">News</li>
-		        </a>
-             </ul>
+		<li>Search</li>
+                <a href="web.php"><li class="btn2">DuckG</li></a>
+                        </ul>
 
         </div>
 
     </div>
-
 
     <div class="col2 <?php echo bg('col2'); ?>">
         <a href="javascript:;" onclick="document.forms['poster'].submit();">
@@ -225,11 +213,12 @@ function whatsnext($s,$mus,$streams){
     <script type="text/javascript">
         auto_volume();
         showNews(headlines);
-	document.getElementById('div_iframe').scrollTop = 58;
-	//var myIframe = document.getElementById('ytplayer');
-	//myIframe.onload = function(){
-    	//myIframe.contentWindow.scrollTo(500,500);
-	//};
+
+	/*For use with Ad-block DISABLED*/
+	document.getElementById('div_iframe').scrollTop = 158;
+
+	/*For use with Ad-block ENABLED*/
+	//document.getElementById('div_iframe').scrollTop = 58;
     </script>
 
 </body>
@@ -238,16 +227,16 @@ function whatsnext($s,$mus,$streams){
 <?php
 function bg($id){
     $col2=array('col1_sunrise','col1_morning','col1_midday','col1_evening','col1_night');
-    $hr=date('H', time());
+    $hr=date('H', time()); 
 
     if($hr<=5){
         $class=${$id}[4];
     }elseif($hr<=9){
         $class=${$id}[0];
     }elseif($hr<=12){
-        $class=${$id}[1];
+        $class=${$id}[1]; 
     }elseif($hr<=17){
-        $class=${$id}[2];
+        $class=${$id}[2];    
     }elseif($hr<=20){
         $class=${$id}[3];
     }else{
@@ -258,7 +247,7 @@ function bg($id){
 
 function getHeadlines(){
     $html="";
-    $file=file_get_contents("http://feeds.bbci.co.uk/news/rss.xml?edition=uk");
+    $file=file_get_contents("http://feeds.bbci.co.uk/news/rss.xml?edition=uk"); 
     preg_match_all("%<title>(.*?)</title>%s", $file, $titles,PREG_PATTERN_ORDER,920);
     preg_match_all("%<link>(.*?)</link>%s", $file, $links,PREG_PATTERN_ORDER,920);
     preg_match_all("%<description>(.*?)</description>%s", $file, $desc,PREG_PATTERN_ORDER,920);
@@ -280,7 +269,7 @@ function getS($streams){
 $output=1;
     if(isset($_GET['s']) && array_key_exists($_GET['s'],$streams)){
         $output=$_GET['s'];
-    }
+    } 
     return $output;
 }
 
@@ -311,24 +300,5 @@ function isNews($t){
         $value="<div class=\"ipchange\">IP CHANGE<br>$realIP<br><span style=\"font-size: small;\">old: $contents</span></div>";
     }
     return $value;
-}
-
-
-function mail_test(){
-
-    $to="riquez@gmail.com";
-    $subject = "mail test";
-	$header = "From: pi@d4damage.net\n";
-	$header .= "Reply-To: pi@d4damage.net\n";
-	$header .= "Return-Path: pi@d4damage.net\n";
-
-	$message = "===============================================\n";
-	$message .="This is a test\n";
-	$message .="===============================================\n";
-	$message .="\n";
-
-    $result=mail($to,$subject,$message,$header);
-
-    return $result;
-} */
+}*/
 ?>

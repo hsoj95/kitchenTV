@@ -8,37 +8,28 @@ Here is a youtube video of it in action : https://www.youtube.com/watch?v=U5OF6t
 If you want to set up the same thing: ======
 
 1) Download my web files & upload to your own web space or host them locally.
-This is the original download, but you can just use the github files now eh? ;-)
-http://bit.ly/2myjcHM
 
 2) EDIT the files to personalise it for your own needs:
 
-* weather.js EDIT your city, country location.
+* config.php has easy user settings you can change. A list of YouTube LIVE channels, you can edit the list for your own channels.
+  - EDIT your city, country location for the weather api, how many days forecast
 
 * images/cface4.png EDIT the clock image if you want your own design. You will find the background colours for sunset, sunrise etc in the images folder too.
 
-* index.php has a list of the YouTube LIVE channels, you can edit the list for your own channels
-You just need the video ID, time in seconds you want it to display for (e.g.: 1200 seconds is 20 mins) & the Name to show in the Icon - A 2 letter code works best like SN for SkyNews ;-)
+* The page layout is designed to fit my TV. It will work on other screens but you would probably want to adjust slightly so it suits your screen. Here is how to best do that:
 
-* The page layout is designed to fit my 720p TV. It will work on other screens but you would probably want to adjust the column widths etc slightly so it suits your screen. Look in the CSS files to adjust those parts. 
+  - load the page in the browser & make it fullscreen.
+  - The buttons on the bottom edge should be visible on screen. If they are off the bottom then reduce the height of the youtube video in config.php reduce the value for $yt_height.
+  - if the news headlines text on the bottom right is too large, or small, you can edit the font size in main.css at the bottom of the file: #news span (the description) & #news a (the title) the values are in vw (viewport width units) but of course use px or em if you like.
+  - if you need to adjust the size of the temperature: weather.css edit the font-size for .temperature
+  - if you need to adjust the size of the forecast cloud graphics: weather.css edit ".forecast span img" right at the bottom (the smallicons) & .weathericon close to the top. change the wisdth % and you might need to adjust the negative margins too.
+   - should you want to adjust the clock position main.css .clocks change the margin. margin: 50px auto; the first value is above & below, auto is left/right to keep it in the middle.
 
-* The www web browsing works in a frame, so it doesnt always work well with some websites - just be aware of this, you can always right-click open in new tab to get around that.
+3) The www web browsing works in a frame, so it doesnt always work well with some websites - just be aware of this, you can always right-click open in new tab to get around that.
+
+4) There is an IP changed alert - I use this to warn me my IP changed as I run my pi as a web server (for fun) I will disable this in the files, you can turn it on in config.php
 
 ==============
-+++ UPDATE ++++
-
-If your BBC news feed isnt working you need to update the script to remove CDATA tags.
-
-index.php, line 198
-Update the clean function with str_replace to remove CDATA tags.
-
-My download link above includes a fixed version & also without the music player - i found it to a little too resource hungry.
-
-+++ UPDATE ++++
-KitchTV 20161030 ZIP file on the download link above is updated with some minor fixes.
-Also, now if you manually click on a news video the live stream will only show news (mus=0) feeds. If you click on a music stream it will switch to music only (mus=1)
-
----------------
 
 The resources I used to put this together:
 
@@ -51,5 +42,3 @@ https://www.script-tutorials.com/html5-clocks/
 - YouTube Javascript API
 https://developers.google.com/youtube/js_api_reference#GettingStarted
 
-- Cincopa music player https://www.cincopa.com/
-Still trying this out, you can remove it from index.php line 150 or sign up for your own account & replace it.

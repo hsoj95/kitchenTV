@@ -1,125 +1,31 @@
 <?php
-date_default_timezone_set("America/New_York"); 
-$date= strtoupper(date("M jS l", time()));
-
-//$mail_test=mail_test();
-
-$vol=(isset($_REQUEST['f_vol'])?$_REQUEST['f_vol']:100);
-$mus=(isset($_REQUEST['mus'])?$_REQUEST['mus']:0);
-// youtube code, time to display in seconds
-// multiplier m
-$m=1000;
-
-// Al Jazeera
-$streams[1]['name']="AJ";
-$streams[1]['url']="dp6W0ZcYwE4";
-$streams[1]['time']=1200*$m;
-$streams[1]['mus']=0;
-
-// monstercat music
-$streams[2]['name']="MC";
-$streams[2]['url']="cCmJdLA5b1I";
-$streams[2]['time']=300*$m;
-$streams[2]['mus']=1;
-
-
-// france 24 news
-$streams[3]['name']="FR";
-$streams[3]['url']="Fwxuzl4ZrHo";
-$streams[3]['time']=1200*$m;
-$streams[3]['mus']=0;
-
-
-// jp weather
-//$streams[3]['name']="JP";
-//$streams[3]['url']="kfTq_A9nBM0";
-//$streams[3]['time']=300*$m;
-//$streams[3]['mus']=0;
-
-// DW-TV
-$streams[4]['name']="DW";
-$streams[4]['url']="gNosnzCaS4I";
-$streams[4]['time']=300*$m;
-$streams[4]['mus']=0;
-
-// Sky News
-$streams[5]['name']="SN";
-$streams[5]['url']="y60wDzZt8yg";
-$streams[5]['time']=300*$m;
-$streams[5]['mus']=1;
-
-// NCS
-//$streams[6]['name']="NC";
-//$streams[6]['url']="asmVy7PgTeQ";
-//$streams[6]['time']=300*$m;
-//$streams[6]['mus']=1;
-
-// earthquake
-//$streams[7]['name']="EQ";
-//$streams[7]['url']="nnJ-1x81yoA";
-//$streams[7]['time']=300*$m;
-//$streams[7]['mus']=0;
-
-
-// mixhound chillstep dxVzsVFAw34
-// deephouse fFppH4_sXBc
-// NCS wCe1zFNSAzU
-// traplife j5tUmWzEAO4
-
-// goodlife music DekL5q5e9lM
-// chillhop cafe mx6t6E24SSM
-
-$s=getS($streams);
-$n=$streams[$s]['name'];
-$u=$streams[$s]['url'];
-$t=$streams[$s]['time'];
-
-
-$next=whatsnext($s,$mus,$streams);
-
-function whatsnext($s,$mus,$streams){
-    $next=0;
-    $i=1;
-        foreach($streams as $k1 => $k2){
-            if($mus==1 && $i>$s && $k2['mus']==1 && $next==0) {
-                $next=$i;
-            }
-            if($mus==0 && $i>$s && $k2['mus']==0 && $next==0){
-                $next=$i;
-            }
-        $i++;
-    }
-   $next=($next==0?1:$next);
-    return $next;
-}
-
-
-//$next=($s==count($streams)?1:$s+1);
+require_once("config.php");
+require_once("inc_library.php");
 ?>
 <html>
 <head>
     <meta charset="utf-8">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,inherit,400" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="weather.css">
-    <link rel="stylesheet" href="rasp.css">
+    <link rel="stylesheet" href="main.css">
 
     <script type="text/javascript">
         // PHP dependant js vars ~
         // page udate after t seconds
-        // setTimeout(function(){ document.forms["poster"].submit(); }, <?php echo $t; ?>);
+        setTimeout(function(){ document.forms["poster"].submit(); }, <?php echo $t; ?>);
         // volume ON/OFF morning/evening
         var on, off, vol = <?php echo $vol; ?>;
         // bbc headlines 
         var headlines =[<?php echo getHeadlines(); ?>];
+
     </script>
 </head>
 
 <body>
-<?php
-echo check_IP();
-?>
+<?php if($ipchecker==1){echo check_IP($ip);} ?>
+
     <div class ="col1">
-        <p><iframe id="ytplayer" width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $u; ?>?rel=0&autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+        <p><iframe id="ytplayer" width="100%" height="<?php echo $yt_height; ?>" src="https://www.youtube.com/embed/<?php echo $u; ?>?rel=0&amp;autoplay=1&amp;enablejsapi=1" frameborder="0" allowfullscreen></iframe>
         </p>
         <span id="digi">
             <span id="dc"></span><br />
@@ -161,26 +67,23 @@ echo check_IP();
                 <?php
                 foreach($streams as $key => $value){
                     ?>
-                <a href="stream.php?s=<?php echo $key; ?>&amp;mus=<?php echo $streams[$key]['mus']; ?>"><li class="btn2<?php echo isPlaying($key); ?><?php echo isNews($streams[$key]['time']/$m); ?>"><?php echo $streams[$key]['name']; ?></li></a>
+                <a href="index.php?s=<?php echo $key; ?>&amp;mus=<?php echo $streams[$key]['mus']; ?>"><li class="btn2<?php echo isPlaying($key); ?><?php echo isNews($streams[$key]['time']/$m); ?>"><?php echo $streams[$key]['name']; ?></li></a>
                 <?php
                 $s++;
                 }
                 ?>
             </ul>
-
+            
             <ul class="vid">
-                <li>Search</li>
-                <a href="web.php">
-		         <li class="btn2">DuckG</li>
-		     </a>
-                <li>Home</li>
-		     <a href='index.php'>
-		         <li class='btn2'>WU</li>
-		     </a>
-            </ul>
+		<li>Home</li>
+		<a href="index.php"><li>WU</li></a>
+		
+		<li>Search</li>
+                <a href="web_browse.php"><li class="btn2">www</li></a>
+                </ul>
 
         </div>
-
+  
     </div>
 
 
@@ -202,114 +105,21 @@ echo check_IP();
     </form>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="jquery-2.2.3.min.jsf"></script>
-    <script src="jquery.simpleWeather.min.jsf"></script>
-    <script src="weather.jsf"></script>
-    <script src="jsclock.jsf"></script>
-    <script src="library.jsf"></script>
+    <script src="jquery-2.2.3.min.js"></script>
+    <script src="jquery.simpleWeather.min.js"></script>
+    <script src="weather.js"></script>
+    <script src="jsclock.js"></script>
+    <script src="library.js"></script>
 
     <script type="text/javascript">    
         auto_volume();
         showNews(headlines);
+        loadWeather(<?php echo $wdays.",'".$wloc."'"; ?>);
     </script>
     
 </body>
 </html>
 
 <?php
-function bg($id){
-    $col2=array('col1_sunrise','col1_morning','col1_midday','col1_evening','col1_night');
-    $hr=date('H', time()); 
-
-    if($hr<=5){
-        $class=${$id}[4];
-    }elseif($hr<=9){
-        $class=${$id}[0];
-    }elseif($hr<=12){
-        $class=${$id}[1]; 
-    }elseif($hr<=17){
-        $class=${$id}[2];    
-    }elseif($hr<=20){
-        $class=${$id}[3];
-    }else{
-        $class=${$id}[4];
-    }
-    return $class;
-}
-
-function getHeadlines(){
-    $html="";
-    $file=file_get_contents("http://feeds.bbci.co.uk/news/rss.xml?edition=uk"); 
-    preg_match_all("%<title>(.*?)</title>%s", $file, $titles,PREG_PATTERN_ORDER,920);
-    preg_match_all("%<link>(.*?)</link>%s", $file, $links,PREG_PATTERN_ORDER,920);
-    preg_match_all("%<description>(.*?)</description>%s", $file, $desc,PREG_PATTERN_ORDER,920);
-
-    for($i=0;$i<=19;$i+=2){
-        $html.="'<a href=\"".$links[1][$i]."\">".clean($titles[1][$i])."</a><br><span>".clean($desc[1][$i])."</span>',";
-    }
-    return $html;
-}
-
-function clean($val){
-    $val=str_replace("'","",$val);
-    $val=str_replace("<![CDATA[","",$val);
-     $val=str_replace("]]>","",$val);
-    return $val;
-}
-
-function getS($streams){
-$output=1;
-    if(isset($_GET['s']) && array_key_exists($_GET['s'],$streams)){
-        $output=$_GET['s'];
-    } 
-    return $output;
-}
-
-function isPlaying($key){
-    $c="";
-    if(isset($_GET['s']) && $_GET['s']==$key){
-        $c=" play";
-    }
-    return $c;
-}
-
-function isNews($t){
-    $classname="";
-    if($t>1000){
-        $classname=" newsbutton";
-    }
-    return $classname;
-}
-
-
-function check_IP(){
-    $realIP = file_get_contents("http://ipecho.net/plain");
-    $value="";
-    $file="ip.txt";
-    $contents=file_get_contents($file);
-   if(!empty($realIP) && $contents != $realIP){
-   // if($contents != $realIP){
-        $value="<div class=\"ipchange\">IP CHANGE<br>$realIP<br><span style=\"font-size: small;\">old: $contents</span></div>";
-    }
-    return $value;
-}
-
-
-function mail_test(){
-    
-    $to="riquez@gmail.com";
-    $subject = "mail test";
-	$header = "From: pi@d4damage.net\n";
-	$header .= "Reply-To: pi@d4damage.net\n";
-	$header .= "Return-Path: pi@d4damage.net\n";
-	
-	$message = "===============================================\n";
-	$message .="This is a test\n";
-	$message .="===============================================\n";
-	$message .="\n";
-
-    $result=mail($to,$subject,$message,$header);
-    
-    return $result;
-}
+// EOF
 ?>

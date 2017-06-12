@@ -1,17 +1,12 @@
 // v3.1.0
 //Docs at http://simpleweatherjs.com
+ 
+// This code has been modified by RiquezJP
 
-$(document).ready(function() {
-  loadWeather(); //Get the initial weather.
-  setInterval(loadWeather, 600000); //Update the weather every 10 minutes.
-});
-
-
-
-function loadWeather(){
+function loadWeather(wdays,wloc){
 
  $.simpleWeather({
-    location: '90210',
+    location: wloc,
     woeid: '',
     unit: 'f',
     success: function(weather) {
@@ -21,24 +16,26 @@ function loadWeather(){
 	wind = weather.wind.speed + ' ' + weather.units.speed;
 	humidity = weather.humidity + ' %';
 	updated = weather.updated;
-	f1i = weather.forecast[1].code;
-	f2i = weather.forecast[2].code;
-	f3i = weather.forecast[3].code;
-	f4i = weather.forecast[4].code;
-	f5i = weather.forecast[5].code;
-	f1d = weather.forecast[1].day;
-	f2d = weather.forecast[2].day;
-	f3d = weather.forecast[3].day;
-	f4d = weather.forecast[4].day;
-	f5d = weather.forecast[5].day;
+
+	// new loop for days
+	if(wdays>9){wdays=9}
+	var iconcode='';
+	var fi= new Array();
+	var fd= new Array();
+	for (var i=1;i<=wdays;i++){
+		fi[i]= weather.forecast[i].code;
+		fd[i] = weather.forecast[i].day;
+		iconcode += '<span><img src="images/weathericons/' + fi[i] + '.svg" /><br />' + fd[i] + '</span>';
+	}
+
 
 	$(".location").text(city);
 	$(".temperature").html(temp);
 	$(".climate_bg").html(wcode);
 	$(".windspeed").html(wind);
 	$(".humidity").text(humidity);
-	$(".updated").text(updated);
-	$(".forecast").html('<span><img src="images/weathericons/' + f1i + '.svg" /><br />' + f1d + '</span><span><img src="images/weathericons/' + f2i + '.svg" /><br />' + f2d + '</span><span><img src="images/weathericons/' + f3i + '.svg" /><br />' + f3d + '</span><span><img src="images/weathericons/' + f4i + '.svg" /><br />' + f4d + '</span><span><img src="images/weathericons/' + f5i + '.svg" /><br />' + f5d + '</span>');
+	$(".updated").text(updated);	
+	$(".forecast").html(iconcode);	
     },
     error: function(error) {
       $(".error").html('<p>'+error+'</p>');

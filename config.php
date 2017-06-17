@@ -30,7 +30,7 @@ $ip="153.189.6.28";
 // ##### YouTube #####
 // set the height of the youtube player. 500 or 600 generally works best.
 // you should set this so that the buttons at the bottom of the screen are still visible.
-$yt_height = 500;
+$yt_height = 484;
 // additionally check the main.css file for #ytplayer so you can set a black border above the video 
 
 // Video streams
@@ -43,7 +43,7 @@ $yt_height = 500;
 // BBC News
 $streams[]=array(
     "name" => "SN",
-    "url" => "HXeGpCFGu-k",
+    "url" => "y60wDzZt8yg",
     "time" => 1200,
     "mus" => 0
 );

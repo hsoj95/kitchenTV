@@ -66,7 +66,7 @@ require_once("inc_library.php");
 
 <body>
     <div class="valign-wrapper" id="loading-screen" style="display: ;">
-        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV</h1>
+        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV<i class="medium material-icons right">schedule</i>/h1>
         <div class="progress" style="width: 80%; left: 10%">
             <div class="indeterminate"></div>
 

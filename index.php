@@ -65,11 +65,59 @@ require_once("inc_library.php");
 </head>
 
 <body>
-    <div class="valign-wrapper" id="loading-screen" style="display: ;">
-        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV<i class="medium material-icons right">schedule</i>/h1>
-        <div class="progress" style="width: 80%; left: 10%">
-            <div class="indeterminate"></div>
+   <div class="valign-wrapper" id="loading-screen" style="display: ;">
+        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV<i class="medium material-icons right">schedule</i></h1>
+        <!-- <div class="progress" style="width: 80%; left: 10%">
+            <div class="indeterminate"></div> -->
 
+        <div class="preloader-wrapper big active" style="left: 48%;">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
         </div>
 
     </div>

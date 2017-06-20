@@ -31,6 +31,21 @@ If you want to set up the same thing: ======
 
 ==============
 
+Additions by @hsoj95:
+
+Along with the original code structure, I have added the following additions. Please note that my changes are intended to be used only with a 1080p screen, and will appear incorectly on smaller screens. When @riquezjp and I merge the forks into one program, we will work on solving the screen compatibility issue. Here are the feautres I added:
+- Added a new default homepage for K.TV that loads the front page of Weather Underground for the user specified location
+- Began integrating parts of the Materialize Framework (links below) into the program:
+  * Added a loading screen to hide the elemnts underneath loading
+  * Added a new navbar and responsive buttons to the botton, with a new logo in the bottom-left corner
+  * Added a few other tweaks as well
+- Changed some of the specific images and font sizes to fit a 1080p screen nicely
+- Changed the forecast default to 5 days instead of 3-4
+
+More changes are to come from me. However, first I want to work with @riquezjp to merge the changes I made into one program so we can both work to make it as compatible and responsive as possible!
+
+==============
+
 The resources I used to put this together:
 
 - Building a weather App - Upamanyu Das
@@ -41,4 +56,7 @@ https://www.script-tutorials.com/html5-clocks/
 
 - YouTube Javascript API
 https://developers.google.com/youtube/js_api_reference#GettingStarted
+
+- Materialize Framework
+http://www.materializecss.com
 

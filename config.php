@@ -90,5 +90,10 @@ $streams[]=array(
 
 // Some channels change their url frequently, so watch out for that & pick what works for you.
 
+// ###### Weather Underground alerts ####
+// your local weather station page to extract alerts from
+$wupage="https://www.wunderground.com/cgi-bin/findweather/getForecast?query=90210";
+// uncomment "wu_advisory" on index.php to start using
+
 
 ?>

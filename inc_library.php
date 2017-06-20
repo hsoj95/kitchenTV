@@ -145,4 +145,39 @@ function mail_test(){
     return $result;
 }
 
+//Pulls the weather alert text from Wunderground for the user specified location
+function wu_advisory($wupage){
+    $file=file_get_contents("$wupage");
+    preg_match_all("%<div class=\"alert-items\">(.*?)</div>%s", $file, $alert, PREG_PATTERN_ORDER);
+    /* Detailed code for simpler viewing and understanding */
+    //$alert_text = $alert[0][0];
+    //$alert_text = strip_tags($alert_text);
+    //$alert_text = trim($alert_text);
+    //$alert_text = substr($alert_text, 16);
+    //$alert_text = trim($alert_text);
+
+    //Condensed code version
+    $alert_text = trim(substr(trim(strip_tags($alert[0][0])), 16));
+    return $alert_text;
+	}
+
+//Determines the color of the alert-card based on the alert type
+function wu_advisory_color($wupage){
+    $file=file_get_contents("$wupage");
+    preg_match_all("%<div class=\"alert-bar(.*?)</div>%s", $file, $alert_color, PREG_PATTERN_ORDER);
+    $defcon = $alert_color[1][0];
+    $defcon = substr($defcon, 8, 1);
+
+    if ($defcon == "3") {
+        return "$(function() { $('#alert-card').removeClass('red').removeClass('orange').removeClass('grey').addClass('yellow') });";
+    } elseif ($defcon == "2") {
+        return "$(function() { $('#alert-card').removeClass('red').removeClass('yellow').removeClass('grey').addClass('orange') });";
+    } elseif ($defcon == "1") {
+        return "$(function() { $('#alert-card').removeClass('orange').removeClass('yellow').removeClass('grey').addClass('red') });";
+    } else {
+        return "$(function() { $('#alert-card').removeClass('red').removeClass('orange').removeClass('yellow').addClass('grey') });";
+    }
+
+}
+
 ?>

@@ -26,18 +26,7 @@ require_once("inc_library.php");
             height: 1000%;
             /* 10x the div height to embrace the whole page */
             overflow: hidden;
-        }
-        
-        #digi {
-            left: 1530px;
-        }
-        
-        #dc {
-            left: 0.2em;
-        }
-        
-        #date {
-            left: 15px;
+            !important
         }
         
         #loading-screen {
@@ -65,24 +54,68 @@ require_once("inc_library.php");
 </head>
 
 <body>
+    <!-- Loading Screen -->
     <div class="valign-wrapper" id="loading-screen" style="display: ;">
-        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV</h1>
-        <div class="progress" style="width: 80%; left: 10%">
-            <div class="indeterminate"></div>
+        <h1 class="center-align" style="position: absolute; left: 40%; top: 37%;">Loading K.TV<i class="medium material-icons right">schedule</i></h1>
 
+        <div class="preloader-wrapper big active" style="left: 48%;">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
         </div>
 
     </div>
+
     <?php if($ipchecker==1){echo check_IP($ip);} ?>
 
     <div class="col1">
         <p>
-            <div id="div_iframe"><iframe id="ytplayer" src='https://www.wunderground.com/cgi-bin/findweather/getForecast?query=31733'></iframe></div>
+            <div id="div_iframe"><iframe id="ytplayer" src='<? echo $wupage; ?>'></iframe></div>
         </p>
-        <span id="digi">
-            <span id="dc"></span><br />
-        <span id="date"><?php echo $date; ?></span>
-        </span>
 
         <div class="weather">
             <div class="w_left">
@@ -146,13 +179,46 @@ require_once("inc_library.php");
     </div>
 
     <div class="col2 <?php echo bg('col2'); ?>">
+
+        <!-- Digital Clock in Materialize card -->
+        <div class="row">
+            <div class="col s12">
+                <div class="card grey darken-3">
+                    <div class="center-align card-content white-text">
+                        <span class="card-title big" id="dc"><br /></span>
+                        <p>
+                            <span id="date"><?php echo $date; ?></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Clock -->
         <a href="javascript:;" onclick="document.forms['poster'].submit();">
             <div class="clocks">
                 <canvas id="canvas" width="500" height="500"></canvas>
             </div>
         </a>
 
+        <!-- News Feed -->
         <div id="news"></div>
+
+        <!-- Weather Alert in Materialize card -->
+        <div class="row" style="display: initial;">
+            <div class="col s12">
+                <div id="alert-card" class="card darken-3">
+                    <div class="card-content white-text">
+                        <span class="card-title">Weather Alert!<!--<i class="material-icons right small pulse">warning</i>--></span>
+                        <a href="<? echo $wupage; ?>" class="btn-floating waves-effect waves-light red pulse" style="position: absolute; left: 85%; bottom: 45%;" target="_blank"><i class="material-icons">warning</i></a>
+                        <p>
+                            <?php echo wu_advisory($wupage); ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </div>
     <div style="clear: both;"></div>
@@ -185,7 +251,9 @@ require_once("inc_library.php");
         //Delays loading screen until the page is fully loaded
         $(window).on("load", function() {
             $("#loading-screen").css("display", "none");
-        })
+        });
+
+        <? echo wu_advisory_color($wupage); ?>
 
     </script>
 
